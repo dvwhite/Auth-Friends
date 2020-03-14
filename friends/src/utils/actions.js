@@ -3,16 +3,16 @@ import axiosWithAuth from './axiosWithAuth';
 
 /**
  * @function: Logs you into the API endpoint and obtains a JWT for server authentication
- * @param {*} credentials: Pass in these credentials to authenticate: { username: 'Lambda School', password: 'i<3Lambd4' }
+ * @param {*} credentials: The credentials used to authenticate
  * @returns: none
  */
-const login = (credentials, props, destination) => {
-  axios.post('/api/login', credentials)
+const login = (credentials) => {
+  return axios.post('/api/login', credentials)
     .then(res => {
-      localStorage.setItem('token', res.data.token);
-      props.history.push(destination)
+      localStorage.setItem('token', res.data.payload);
+      return res;
     })
-    .catch(err => console.error(err.response))
+    .catch(err => console.log("Error in login:", err.response))
 }
 
 // Protected endpoints requiring an authentication token
