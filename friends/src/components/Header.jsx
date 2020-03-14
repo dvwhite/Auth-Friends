@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // Styled components
 import styled from 'styled-components';
@@ -19,7 +20,9 @@ const NavLink = styled.li`
 const Header = () => {
   return (
     <Nav>
-      <NavLink>Log In</NavLink>
+      <NavLink>
+        <Link to="/login">Login</Link>
+      </NavLink>
     </Nav>
   );
 }
