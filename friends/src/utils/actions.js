@@ -80,8 +80,8 @@ export const addFriend = friend => {
  * @returns: none (?)
  */
 export const updateFriend = friend => {
-  axiosWithAuth()
-    .put(`/api/friends/:${friend.id}`, friend)
+  return axiosWithAuth()
+    .put(`/api/friends/${friend.id}`, friend)
     .then(res => {
       console.log(res);
       return res

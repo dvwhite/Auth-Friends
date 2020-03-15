@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import { updateFriend, deleteFriend } from './../utils/actions';
 
 // SVGs
-import { ReactComponent as TrashSvg } from "./../trash.svg";
+import { ReactComponent as TrashSvg } from './../trash.svg';
+import { ReactComponent as EditSvg } from './../edit.svg';
 
 // Styled components
 import styled from 'styled-components';
@@ -17,7 +18,7 @@ const Card = styled.form`
   box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0, 0, 0, 0.12),
     0 2px 4px rgba(0, 0, 0, 0.24);
   width: 23rem;
-  height: 14rem;
+  height: 15rem;
   overflow: hidden;
   word-wrap: break-word;
   overflow: hidden;
@@ -40,21 +41,52 @@ const Card = styled.form`
   }
 `;
 
+const Input = styled.input`
+  margin: 1%;
+  width: 20%;
+  border-radius: 5px;
+  border: 1px solid gray;
+  outline: 0;
+
+  @media (max-width: 1400px) {
+    width: 30%;
+  }
+
+  @media (max-width: 1200px) {
+    width: 40%;
+  }
+
+  @media (max-width: 1000px) {
+    width: 50%;
+  }
+
+  &:focus {
+    border: 1px solid dodgerblue;
+    box-shadow: 2px 2px 4px dodgerblue;
+  }
+`
+
 const Icon = styled.div`
   position: relative;
+  margin-bottom: 0.5rem;
 
   svg {
     background: white;
     position: absolute;
     z-index: 0;
-    top: 0.5em;
-    right: 3%;
     width: 20px;
     height: 20px;
 
     path {
       fill: #3434;
     }
+  }
+`
+
+const TrashIcon = styled(Icon)`
+  svg {
+    top: 0.3em;
+    right: 3%;
   }
 
   &:hover {
@@ -63,7 +95,21 @@ const Icon = styled.div`
       fill: crimson !important;
     }
   }
-`;
+`
+
+const EditIcon = styled(Icon)`
+  svg {
+    top: 0.5em;
+    right: 2.5%;
+  }
+
+  &:hover {
+    svg > path {
+      transition: all 0.3s ease;
+      fill: dodgerblue !important;
+    }
+  }
+`
 
 /**
  * @function: A card displaying the data for a single friend
@@ -89,6 +135,14 @@ const Friend = ({ data, setFriends }) => {
       .catch(err => console.error(err.response));
   }
 
+  const editFriend = friend => {
+    updateFriend(friend)
+      .then(res => {
+        setFriends(res.data)
+      })
+      .catch(err => console.error(err.response));
+  }
+
   // Handlers
   const handleClick = () => {
     toggleEditing();
@@ -103,7 +157,7 @@ const Friend = ({ data, setFriends }) => {
   const handleSubmit = event => {
     // Update the Friend in the API using the submitted form data
     event.preventDefault();
-    updateFriend(input); // update the Friend object in the API
+    editFriend(input); // update the Friend object in the API
     setInput(initialInputState); // reset the input values
     toggleEditing(); // reset the editing flag
     event.target.reset(); // clear the form
@@ -117,20 +171,20 @@ const Friend = ({ data, setFriends }) => {
         <TrashSvg />
       </TrashIcon>
       <EditIcon onClick={handleClick}>
-
+        <EditSvg />
       </EditIcon>
       {isEditing ? (
-        <input
+        <Input
           name="name"
           value={input.name}
           placeholder={data.name}
           onChange={handleChange}
         />
       ) : (
-        <h1>{data.name}</h1>
+        <h2>{data.name}</h2>
       )}
       {isEditing ? (
-        <input
+        <Input
           name="age"
           value={input.age}
           placeholder={data.age}
@@ -140,7 +194,7 @@ const Friend = ({ data, setFriends }) => {
         <p>Age: {data.age}</p>
       )}
       {isEditing ? (
-        <input
+        <Input
           name="email"
           value={input.email}
           placeholder={data.email}
@@ -150,7 +204,7 @@ const Friend = ({ data, setFriends }) => {
         <p>Email: {data.email}</p>
       )}
       {isEditing ? (
-        <input type="submit" value="Submit"></input>
+        <Input type="submit" value="Submit"></Input>
       ) : (
         null
       )}
