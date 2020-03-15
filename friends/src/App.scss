@@ -15,3 +15,11 @@ a {
   padding: 6px;
   color: #204963;
 }
+
+p {
+  margin-top: 2%;
+
+  &:last-of-type {
+    margin-bottom: 5%;
+  }
+}
