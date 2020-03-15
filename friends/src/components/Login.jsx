@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { login } from './../utils/actions';
+import { useHistory } from 'react-router-dom';
 
 // Styled components
 import styled from 'styled-components';
@@ -12,11 +13,12 @@ const Input = styled.input`
 
 `
 
-const Button = styled.input`
+const Submit = styled.input`
 
 `
 
 const Login = (props) => {
+  const history = useHistory();
   const [input, setInput] = useState({username:'', password:''})
   const credentials = { username: 'Lambda School', password: 'i<3Lambd4' };
 
@@ -28,11 +30,8 @@ const Login = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    login(credentials)
-      .then(res => {
-        props.history.push('/friends');
-      })
-      .catch(err => console.log("Error in Login.handleSubmit:",err.response));
+    login(input, history);
+    setInput({username:'', password:''});
   }
 
   // The form component
@@ -41,15 +40,15 @@ const Login = (props) => {
       <Input
         type="text"
         name="username"
-        value={credentials.username}
-        placeholder='username'
+        value={input.username}
+        placeholder={credentials.username}
         onChange={handleChange}
       />
       <Input
         type="password"
         name="password"
-        value={credentials.password}
-        placeholder='password'
+        value={input.password}
+        placeholder={credentials.password}
         onChange={handleChange}
       />
       <Submit type='submit' value='Log In' />

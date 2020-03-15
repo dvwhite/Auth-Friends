@@ -1,16 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 // Component imports
 import PrivateRoute from './PrivateRoute';
+import Login from './Login';
+import Friends from './Friends';
 
 const MasterRouter = () => {
   return (
     <Switch>
-      <PrivateRoute exact path='/friends' component={Friends} />
+      <PrivateRoute path='/friends' component={Friends} />
       <Route exact path='/login' component={Login} />
+      <Route path='/' component={Login} />} />
     </Switch>
-  )
+  );
 }
 
 export default MasterRouter;

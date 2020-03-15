@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 // Styled components
 import styled from 'styled-components';
+import { logout } from '../utils/actions';
 
 const Nav = styled.ul`
   display: flex;
@@ -22,6 +23,9 @@ const Header = () => {
     <Nav>
       <NavLink>
         <Link to="/login">Login</Link>
+      </NavLink>
+      <NavLink>
+        <Link to="/" onClick={e => logout()}>Logout</Link>
       </NavLink>
     </Nav>
   );

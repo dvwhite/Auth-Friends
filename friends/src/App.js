@@ -3,7 +3,6 @@ import './App.scss';
 
 // Component imports
 import Header from './components/Header';
-import Login from './components/Login';
 import MasterRouter from './components/MasterRouter';
 
 // The main app component that renders all child content
@@ -12,7 +11,6 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Login />
       <MasterRouter />
     </div>
   );

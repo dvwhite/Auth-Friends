@@ -1,20 +1,29 @@
 import axios from "axios";
-import axiosWithAuth from "./axiosWithAuth";
+import { axiosWithAuth } from "./axiosWithAuth";
 
 /**
  * @function: Sends a post to log you in and obtain an authentication token for the endpoint
  * @param {*} credentials: The credentials used to authenticate
  * @returns {Promise} promise: The API promise to be resolved in useEffect or componentDidMount
  */
-export const login = async credentials => {
-  const promise = await axios.post("/api/login", credentials);
-  return promise
+export const login = (credentials, history) => {
+  return axios.post("http://localhost:5000/api/login", credentials)
     .then(res => {
       localStorage.setItem("token", res.data.payload);
+      history.push('/friends');
       return res;
     })
     .catch(err => console.log("Error in actions>login:", err.response));
 };
+
+/**
+ * @function: Remove the authentication token on logout
+ * @param: none
+ * @returns: none
+ */
+export const logout = (history) => {
+  localStorage.removeItem('token')
+}
 
 // Protected endpoints requiring an authentication token
 /**
