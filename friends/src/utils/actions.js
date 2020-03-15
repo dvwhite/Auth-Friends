@@ -95,11 +95,11 @@ export const updateFriend = friend => {
  * @returns: none (?)
  */
 export const deleteFriend = id => {
-  axiosWithAuth()
+  return axiosWithAuth()
     .delete(`/api/friends/${id}`)
-    .then(res => {
-      console.log(res);
-      return res
-    })
-    .catch(err => console.error(err.response));
+      .then(res => {
+        console.log(res);
+        return res
+      })
+      .catch(err => console.error(err.response));
 };
