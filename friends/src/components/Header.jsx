@@ -10,6 +10,13 @@ const Nav = styled.div`
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s ease;
+  background-color: lightgray;
+
+  &:hover {
+    transition: all 0.3s ease;
+    background-color: lightblue;
+  }
 `
 
 const LogoContainer = styled.div`
@@ -36,6 +43,12 @@ const NavLink = styled.li`
   list-style: none;
   margin-right: 6px;
   color: #204963;
+  
+  &:hover {
+    transition: all 0.3s ease;
+    transform: scale(1.05);
+    font-weight: bold;
+  }
 `
 
 const Header = () => {
