@@ -17,12 +17,13 @@ export const login = (credentials, history) => {
 };
 
 /**
- * @function: Remove the authentication token on logout
+ * @function: Remove the authentication token on logout and redirect user to /
  * @param: none
  * @returns: none
  */
 export const logout = (history) => {
   localStorage.removeItem('token')
+  history.push('/');
 }
 
 // Protected endpoints requiring an authentication token
@@ -32,11 +33,11 @@ export const logout = (history) => {
  * @returns: none
  */
 export const getAllFriends = () => {
-  axiosWithAuth()
+  return axiosWithAuth()
     .get("/api/friends")
     .then(res => {
       console.log(res);
-      return res.data;
+      return res;
     })
     .catch(err => console.error(err.response));
 };
@@ -51,7 +52,7 @@ export const getFriend = id => {
     .get(`/api/friends/${id}`)
     .then(res => {
       console.log(res);
-      return res.data;
+      return res;
     })
     .catch(err => console.error(err.response));
 };
@@ -67,7 +68,7 @@ export const addFriend = friend => {
     .post("/api/friends", friend)
     .then(res => {
       console.log(res);
-      return res.data;
+      return res;
     })
     .catch(err => console.error(err.response));
 };
@@ -83,7 +84,7 @@ export const updateFriend = friend => {
     .put(`/api/friends/:${friend.id}`, friend)
     .then(res => {
       console.log(res);
-      return res.data;
+      return res
     })
     .catch(err => console.error(err.response));
 };
@@ -98,7 +99,7 @@ export const deleteFriend = id => {
     .delete(`/api/friends/${id}`)
     .then(res => {
       console.log(res);
-      return res.data;
+      return res
     })
     .catch(err => console.error(err.response));
 };
