@@ -21,14 +21,6 @@ const Friends = () => {
   // State
   const [friends, setFriends] = useState([]);
 
-  // Animation state
-  let animeProps = {
-    easing: "easeOutElastic",
-    opacity: [0, 1],
-    translateY: '1rem',
-    delay: (e, i) => i * 2500,
-  }
-
   // Fetch friends list on initial mount
   useEffect(() => {
     getAllFriends()
@@ -47,9 +39,7 @@ const Friends = () => {
       {friends.map((friend, idx) => (
         <Friend key={idx} data={friend} setFriends={setFriends} />
       ))}
-      <Anime {...animeProps}>
-        <AddFriendForm id={friends.length + 1} setFriends={setFriends} />
-      </Anime>
+      <AddFriendForm id={friends.length + 1} setFriends={setFriends} />
     </Cards>
   );
 };
