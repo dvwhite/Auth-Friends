@@ -17,7 +17,16 @@ const Cards = styled.div`
 `;
 
 const Friends = () => {
+  // State
   const [friends, setFriends] = useState([]);
+
+  // Animation state
+  let animeProps = {
+    easing: "easeOutElastic",
+    opacity: [0, 1],
+    translateY: '1rem',
+    delay: (e, i) => i * 2500,
+  }
 
   // Fetch friends list on initial mount
   useEffect(() => {
