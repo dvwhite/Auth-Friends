@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import { updateFriend, deleteFriend } from "./../utils/actions";
 
 // SVGs
-import { ReactComponent as TrashSvg } from "./../trash.svg";
-import { ReactComponent as EditSvg } from "./../edit.svg";
+import { ReactComponent as TrashSvg } from "./../icons/trash.svg";
+import { ReactComponent as EditSvg } from "./../icons/edit.svg";
+import { ReactComponent as CancelSvg } from "./../icons/sm-cancel.svg";
 
 // Styled components
 import styled from "styled-components";
@@ -18,9 +19,8 @@ const Card = styled.form`
   opacity: 0.95;
   border: 0;
   border-radius: 10px;
-  box-shadow: 0 -1px 0 #e0e0e0, 
-              0 0 2px rgba(0, 0, 0, 0.12),
-              0 2px 4px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0, 0, 0, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.24);
   width: 23rem;
   height: 13rem;
   overflow: hidden;
@@ -37,8 +37,10 @@ const Card = styled.form`
     box-shadow: 4px 4px 8px #444;
 
     & > div > svg {
+      transition: all 0.3s ease;
+      stroke: #444;
+
       path {
-        transition: all 0.3s ease;
         fill: #444;
       }
     }
@@ -48,6 +50,7 @@ const Card = styled.form`
 // The input elements on the form
 const Input = styled.input`
   margin: 1%;
+  padding: 2%:
   width: 40%;
   border-radius: 5px;
   border: 1px solid gray;
@@ -83,6 +86,7 @@ const Icon = styled.div`
     z-index: 0;
     width: 20px;
     height: 20px;
+    stroke: #3434;
 
     path {
       fill: #3434;
@@ -116,6 +120,19 @@ const EditIcon = styled(Icon)`
     svg > path {
       transition: all 0.3s ease;
       fill: dodgerblue !important;
+    }
+  }
+`;
+
+// The trash icon that lets user delete the card
+const CancelIcon = styled(Icon)`
+  svg {
+    top: 0.3em;
+    right: 3%;
+
+    &:hover {
+      transition: all 0.3s ease;
+      stroke: red !important;
     }
   }
 `;
@@ -213,17 +230,22 @@ const Friend = ({ data, setFriends }) => {
     <Card onSubmit={handleSubmit}>
       {/* The conditionally rendered content is below */}
       {/* The icons for deleting and editing this card */}
-      {!isEditing ? (
+      {isEditing ? (
+        <CancelIcon>
+          <CancelSvg />
+        </CancelIcon>
+      ) : (
         <TrashIcon onClick={e => removeFriend(data.id)}>
           <TrashSvg />
         </TrashIcon>
-      ) : null}
+      )}
       {!isEditing ? (
         <EditIcon onClick={handleClick}>
           <EditSvg />
         </EditIcon>
       ) : null}
       {/* Form or content elements */}
+      {isEditing ? <h2>Edit the Friend</h2> : null}
       {isEditing ? (
         <Input
           name="name"
