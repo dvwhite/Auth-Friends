@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Anime from 'react-anime';
 
 // Helper functions
 import { getAllFriends } from "../utils/actions";
 
 // Component imports
 import Friend from "./Friend";
+import AddFriendForm from './AddFriendForm';
 
 // Styled components
 import styled from "styled-components";
@@ -12,7 +14,6 @@ import styled from "styled-components";
 const Cards = styled.div`
   display: flex;
   flex-flow: row wrap;
-  align-items: center;
   justify-content: center;
 `;
 
@@ -46,6 +47,9 @@ const Friends = () => {
       {friends.map((friend, idx) => (
         <Friend key={idx} data={friend} setFriends={setFriends} />
       ))}
+      <Anime {...animeProps}>
+        <AddFriendForm id={friends.length + 1} setFriends={setFriends} />
+      </Anime>
     </Cards>
   );
 };

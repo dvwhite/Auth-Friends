@@ -36,7 +36,6 @@ export const getAllFriends = () => {
   return axiosWithAuth()
     .get("/api/friends")
     .then(res => {
-      console.log(res);
       return res;
     })
     .catch(err => console.error(err.response));
@@ -83,7 +82,6 @@ export const updateFriend = friend => {
   return axiosWithAuth()
     .put(`/api/friends/${friend.id}`, friend)
     .then(res => {
-      console.log(res);
       return res
     })
     .catch(err => console.error(err.response));
@@ -98,7 +96,6 @@ export const deleteFriend = id => {
   return axiosWithAuth()
     .delete(`/api/friends/${id}`)
       .then(res => {
-        console.log(res);
         return res
       })
       .catch(err => console.error(err.response));
