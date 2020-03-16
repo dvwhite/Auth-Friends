@@ -51,27 +51,31 @@ const Card = styled.form`
 const Input = styled.input`
   margin: 1%;
   padding: 2%:
-  width: 40%;
+  width: 50%;
   border-radius: 5px;
   border: 1px solid gray;
   outline: 0;
   align-self: center;
 
   @media (max-width: 1400px) {
-    width: 30%;
+    width: 55%;
   }
 
   @media (max-width: 1200px) {
-    width: 40%;
+    width: 60%;
   }
 
   @media (max-width: 1000px) {
-    width: 50%;
+    width: 65%;
   }
 
   &:focus {
     border: 1px solid dodgerblue;
     box-shadow: 2px 2px 4px dodgerblue;
+  }
+
+  &:last-of-type {
+    margin-bottom: 5%;
   }
 `;
 
@@ -97,7 +101,7 @@ const Icon = styled.div`
 // The trash icon that lets user delete the card
 const TrashIcon = styled(Icon)`
   svg {
-    top: 0.3em;
+    top: 0.5em;
     right: 3%;
   }
 
@@ -112,7 +116,7 @@ const TrashIcon = styled(Icon)`
 // The edit icon that lets user launch the form to edit the card
 const EditIcon = styled(Icon)`
   svg {
-    top: 0.5em;
+    top: 0.3em;
     right: 2.5%;
   }
 
@@ -132,7 +136,7 @@ const CancelIcon = styled(Icon)`
 
     &:hover {
       transition: all 0.3s ease;
-      stroke: red !important;
+      stroke: crimson !important;
     }
   }
 `;
@@ -231,18 +235,18 @@ const Friend = ({ data, setFriends }) => {
       {/* The conditionally rendered content is below */}
       {/* The icons for deleting and editing this card */}
       {isEditing ? (
-        <CancelIcon>
+        <CancelIcon onClick={handleClick}>
           <CancelSvg />
         </CancelIcon>
       ) : (
-        <TrashIcon onClick={e => removeFriend(data.id)}>
-          <TrashSvg />
-        </TrashIcon>
-      )}
-      {!isEditing ? (
         <EditIcon onClick={handleClick}>
           <EditSvg />
         </EditIcon>
+      )}
+      {!isEditing ? (
+        <TrashIcon onClick={e => removeFriend(data.id)}>
+          <TrashSvg />
+        </TrashIcon>
       ) : null}
       {/* Form or content elements */}
       {isEditing ? <h2>Edit the Friend</h2> : null}
