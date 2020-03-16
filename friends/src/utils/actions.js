@@ -63,7 +63,7 @@ export const getFriend = id => {
  * @returns: The new list of friends
  */
 export const addFriend = friend => {
-  axiosWithAuth()
+  return axiosWithAuth()
     .post("/api/friends", friend)
     .then(res => {
       console.log(res);

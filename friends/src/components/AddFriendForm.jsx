@@ -72,6 +72,21 @@ const AddFriendForm = ({ id, setFriends }) => {
   const initialInputState = { name: "", age: "", email: "", id: id };
   const [input, setInput] = useState(initialInputState);
 
+  // Actions
+  
+  /**
+  * @function insertFriend: A wrapper that sets the parent state with the resolved promise
+  * @param {*} friend: The friend object to add to the API
+  * @returns: none
+  */
+  const insertFriend = friend => {
+    addFriend(friend)
+      .then(res => {
+        setFriends(res.data);
+      })
+      .catch(err => console.error(err.response));
+  };  
+
   // Event handlers
 
   /**
@@ -93,7 +108,7 @@ const AddFriendForm = ({ id, setFriends }) => {
   const handleSubmit = event => {
     // Update the Friend in the API using the submitted form data
     event.preventDefault();
-    addFriend(input); // update the Friend object in the API
+    insertFriend(input); // update the Friend object in the API
     setInput(initialInputState); // reset the input values
     event.target.reset(); // clear the form
   };

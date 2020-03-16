@@ -39,7 +39,7 @@ const Friends = () => {
       {friends.map((friend, idx) => (
         <Friend key={idx} data={friend} setFriends={setFriends} />
       ))}
-      <AddFriendForm id={friends.length + 1} setFriends={setFriends} />
+      <AddFriendForm id={Date.now()} setFriends={setFriends} />
     </Cards>
   );
 };
