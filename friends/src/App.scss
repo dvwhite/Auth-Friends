@@ -1,0 +1,29 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  padding-bottom: 36px;
+}
+
+a {
+  text-decoration: none;
+  padding: 6px;
+  color: #204963;
+}
+
+p {
+  margin-top: 2%;
+
+  &:last-of-type {
+    margin-bottom: 6%;
+  }
+}
+
+h2 {
+  margin-bottom: 1%;
+}
